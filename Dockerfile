@@ -1,6 +1,4 @@
-
-# scala-play
-FROM openshift/base-centos7
+FROM openjdk:8-jdk
 
 # TODO: Put the maintainer name in the image metadata
 # MAINTAINER Your Name <your@email.com>
