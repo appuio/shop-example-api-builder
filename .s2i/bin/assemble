@@ -22,7 +22,8 @@ fi
 
 echo "---> Installing application source..."
 cp -Rf /tmp/src/. ./
-ls /opt/app-root/src
+ls -la /opt/app-root/src
+ls -la /opt/app-root/src/project
 
 echo "---> Building application from source..."
 sbt --debug stage
