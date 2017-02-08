@@ -1,47 +1,35 @@
-FROM openjdk:8-jdk
+# extend the base image provided by OpenShift
+FROM openshift/base-centos7
 
-MAINTAINER Roland Schläfli <roland.schlaefli@vshn.net>
+# specify wanted versions of Java and SBT
+ENV JAVA_VERSION 1.8.0 \
+    SBT_VERSION 0.13.13
 
-# set labels used in OpenShift to describe the builder image
-LABEL \
-    io.k8s.description="Platform for building Scala Play! applications" \
-    io.k8s.display-name="builder scala-play" \
-    io.openshift.expose-services="9000:http" \
-    io.openshift.tags="builder,scala,play" \
-    # location of the STI scripts inside the image.
-    io.openshift.s2i.scripts-url=image:///usr/libexec/s2i
+# add the repository for SBT to the yum package manager
+COPY bintray--sbt-rpm.repo /etc/yum.repos.d/bintray--sbt-rpm.repo
 
-ENV \
-    SBT_VERSION=0.13.13 \
-    HOME=/opt/app-root\
-    PATH=/opt/app-root/bin:$PATH
+# install Java and SBT
+RUN yum install -y \
+        java-${JAVA_VERSION}-openjdk \
+        java-${JAVA_VERSION}-openjdk-devel \
+        sbt-${SBT_VERSION} && \
+    yum clean all -y
 
-# install SBT and other packages
-RUN \
-    apt-get update && \
-    apt-get install -y apt-transport-https && \
-    echo "deb https://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.list.d/sbt.list && \
-    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2EE0EA64E40A89B84B2DF73499E82A75642AC823 && \
-    apt-get update && \
-    apt-get install -y sbt=$SBT_VERSION && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+# initialize SBT
+RUN sbt -ivy /opt/app-root/src/.ivy2 about
 
-# copy the S2I scripts to /usr/libexec/s2i as specified in label above
-COPY ./.s2i/bin/ /usr/libexec/s2i
+# chown the ivy directories to the correct user
+RUN chown -R 1001:0 /opt/app-root/src && \
+    chmod -R g+rw /opt/app-root/src
 
-# add a non root user and make it the owner of the application directory
-RUN \
-    mkdir /opt/app-root && \
-    useradd -u 1001 -r -g 0 -d ${HOME} -s /sbin/nologin -c "Default Application User" default && \
-    chown -R 1001:0 /opt/app-root
+# copy the s2i scripts into the image
+COPY ./s2i/bin $STI_SCRIPTS_PATH
 
-# switch to the created 1001 user for execution
-USER 1001
-WORKDIR $HOME
-
-# expose the default play app port
+# expose the default Play! port
 EXPOSE 9000
 
-# set the default CMD for the image
+# switch to the user 1001
+USER 1001
+
+# show usage info as a default command
 CMD ["usage"]
