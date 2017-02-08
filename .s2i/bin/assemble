@@ -22,10 +22,7 @@ fi
 
 echo "---> Installing application source..."
 cp -Rf /tmp/src/. ./
-ls -la /opt/app-root/src
-ls -la /opt/app-root/src/project
-
 
 echo "---> Building application from source..."
-# sbt --debug
-# cp -Rf ./target/universal/stage ../app
+sbt --debug clean dist stage
+cp -Rf ./target/universal/stage ../app
