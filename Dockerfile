@@ -26,9 +26,6 @@ RUN yum install -y \
         sbt-${SBT_VERSION} && \
     yum clean all -y
 
-# initialize SBT
-RUN sbt -ivy ${HOME}/.ivy2 about
-
 # copy the s2i scripts into the image
 COPY ./.s2i/bin $STI_SCRIPTS_PATH
 
@@ -42,6 +39,9 @@ EXPOSE 9000
 
 # switch to the user 1001
 USER 1001
+
+# initialize SBT
+RUN sbt -ivy ${HOME}/.ivy2 about
 
 # show usage info as a default command
 CMD ["usage"]
