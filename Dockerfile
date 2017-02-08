@@ -8,12 +8,13 @@ LABEL \
     io.k8s.display-name="builder scala-play" \
     io.openshift.expose-services="9000:http" \
     io.openshift.tags="builder,scala,play" \
-    io.openshift.s2i.scripts-url=image:///usr/libexec/s2i # location of the STI scripts inside the image.
+    # location of the STI scripts inside the image.
+    io.openshift.s2i.scripts-url=image:///usr/libexec/s2i
 
 ENV \
-    SBT_VERSION 0.13.13 \
-    HOME=/opt/app-root/src \
-    PATH=/opt/app-root/src/bin:/opt/app-root/bin:$PATH
+    SBT_VERSION=0.13.13 \
+    HOME=/opt/app-root\
+    PATH=/opt/app-root/bin:$PATH
 
 # install SBT and other packages
 RUN \
@@ -31,11 +32,13 @@ COPY ./.s2i/bin/ /usr/libexec/s2i
 
 # add a non root user and make it the owner of the application directory
 RUN \
+    mkdir /opt/app-root && \
     useradd -u 1001 -r -g 0 -d ${HOME} -s /sbin/nologin -c "Default Application User" default && \
     chown -R 1001:0 /opt/app-root
 
 # switch to the created 1001 user for execution
 USER 1001
+WORKDIR $HOME
 
 # expose the default play app port
 EXPOSE 9000
