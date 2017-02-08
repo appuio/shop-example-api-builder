@@ -25,6 +25,8 @@ cp -Rf /tmp/src/. ./
 ls -la /opt/app-root/src
 ls -la /opt/app-root/src/project
 free -m
+$JAVA_HOME
+$JAVA_OPTS
 
 echo "---> Building application from source..."
 sbt --debug stage
