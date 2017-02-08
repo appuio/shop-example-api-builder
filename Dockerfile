@@ -41,7 +41,7 @@ EXPOSE 9000
 USER 1001
 
 # initialize SBT
-RUN sbt -ivy ${HOME}/.ivy2 about
+# RUN sbt -ivy ${HOME}/.ivy2 about
 
 # show usage info as a default command
 CMD ["usage"]
