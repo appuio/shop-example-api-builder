@@ -33,8 +33,8 @@ RUN sbt -ivy /opt/app-root/src/.ivy2 about
 COPY ./.s2i/bin $STI_SCRIPTS_PATH
 
 # chown the ivy directories to the correct user
-RUN chown -R 1001:0 /opt/app-root/src && \
-    chmod -R g+rw /opt/app-root/src && \
+RUN chown -R 1001:0 /opt/app-root && \
+    chmod -R g+rw /opt/app-root && \
     chmod -R g+rx $STI_SCRIPTS_PATH
 
 # expose the default Play! port
