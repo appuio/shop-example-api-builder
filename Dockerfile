@@ -23,7 +23,7 @@ RUN chown -R 1001:0 /opt/app-root/src && \
     chmod -R g+rw /opt/app-root/src
 
 # copy the s2i scripts into the image
-COPY ./s2i/bin $STI_SCRIPTS_PATH
+COPY ./.s2i/bin $STI_SCRIPTS_PATH
 
 # expose the default Play! port
 EXPOSE 9000
