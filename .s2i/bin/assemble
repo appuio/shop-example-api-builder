@@ -22,17 +22,8 @@ fi
 
 echo "---> Installing application source..."
 cp -Rf /tmp/src/. ./
-echo "/tmp/src"
-ls /tmp/src
-echo "."
-ls .
-echo "~"
-ls ~
-echo "app-root"
-ls /opt/app-root
-echo "app-root/src"
 ls /opt/app-root/src
 
 echo "---> Building application from source..."
-sbt --debug -ivy /opt/app-root/src/.ivy2 dist stage
+sbt --debug stage
 cp -Rf ./target/universal/stage ../app
