@@ -1,5 +1,5 @@
 
-IMAGE_NAME = scala-play
+IMAGE_NAME = scala-play-s2i
 
 build:
 	docker build -t $(IMAGE_NAME) .

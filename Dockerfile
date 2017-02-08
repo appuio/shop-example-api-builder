@@ -2,8 +2,8 @@
 FROM openshift/base-centos7
 
 # specify wanted versions of Java and SBT
-ENV JAVA_VERSION 1.8.0 \
-    SBT_VERSION 0.13.13
+ENV JAVA_VERSION=1.8.0 \
+    SBT_VERSION=0.13.13.1
 
 # add the repository for SBT to the yum package manager
 COPY bintray--sbt-rpm.repo /etc/yum.repos.d/bintray--sbt-rpm.repo
