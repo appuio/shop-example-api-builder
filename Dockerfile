@@ -31,7 +31,7 @@ RUN sbt -ivy /opt/app-root/src/.ivy2 about
 
 # chown the ivy directories to the correct user
 RUN chown -R 1001:0 /opt/app-root/src && \
-    chmod -R g+rw /opt/app-root/src /usr/libexec/s2i
+    chmod -R g+rw /opt/app-root/src $STI_SCRIPTS_PATH
 
 # copy the s2i scripts into the image
 COPY ./.s2i/bin $STI_SCRIPTS_PATH
