@@ -12,8 +12,8 @@ LABEL \
 
 # specify wanted versions of Java and SBT
 ENV JAVA_VERSION=1.8.0 \
-    SBT_VERSION=0.13.13.1 \
-    HOME=/opt/app-root \
+    SBT_VERSION=0.13.13.1-1 \
+    HOME=/opt/app-root/src \
     PATH=/opt/app-root/bin:$PATH
 
 # add the repository for SBT to the yum package manager
@@ -27,7 +27,7 @@ RUN yum install -y \
     yum clean all -y
 
 # initialize SBT
-RUN sbt -ivy /opt/app-root/.ivy2 about
+RUN sbt -ivy ${HOME}/.ivy2 about
 
 # copy the s2i scripts into the image
 COPY ./.s2i/bin $STI_SCRIPTS_PATH
