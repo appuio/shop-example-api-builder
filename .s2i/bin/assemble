@@ -22,6 +22,11 @@ fi
 
 echo "---> Installing application source..."
 cp -Rf /tmp/src/. ./
+ls /tmp/src
+ls .
+ls ~
+ls /opt/app-root
+ls /opt/app-root/src
 
 echo "---> Building application from source..."
 sbt --debug -ivy /opt/app-root/src/.ivy2 dist stage
