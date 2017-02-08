@@ -24,7 +24,5 @@ echo "---> Installing application source..."
 cp -Rf /tmp/src/. ./
 
 echo "---> Building application from source..."
-ls .
-ls ~
-ls /tmp
-ls /tmp/src
+sbt clean dist stage
+cp -Rf ./target/universal/stage ../app
