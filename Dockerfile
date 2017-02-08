@@ -23,7 +23,7 @@ COPY bintray--sbt-rpm.repo /etc/yum.repos.d/bintray--sbt-rpm.repo
 RUN yum install -y \
         java-${JAVA_VERSION}-openjdk \
         java-${JAVA_VERSION}-openjdk-devel \
-        sbt-${SBT_VERSION} && \
+        sbt && \
     yum clean all -y
 
 # copy the s2i scripts into the image
