@@ -8,7 +8,7 @@ LABEL \
     io.openshift.expose-services="9000:http" \
     io.openshift.tags="builder,scala,play" \
     # location of the STI scripts inside the image.
-    io.openshift.s2i.scripts-url=image:///usr/libexec/s2i
+    io.openshift.s2i.scripts-url=image://$STI_SCRIPTS_PATH
 
 # specify wanted versions of Java and SBT
 ENV JAVA_VERSION=1.8.0 \
