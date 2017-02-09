@@ -21,7 +21,8 @@ if [ "$(ls /tmp/artifacts/ 2>/dev/null)" ]; then
 fi
 
 echo "---> Installing application source..."
-# cp -Rf /tmp/src/. ./
+cp -Rf /tmp/src/. ./
+ls -la .
 
 echo "---> Building application from source..."
 sbt -ivy /opt/app-root/src/.ivy2 --debug about
