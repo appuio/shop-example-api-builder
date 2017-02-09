@@ -21,8 +21,8 @@ if [ "$(ls /tmp/artifacts/ 2>/dev/null)" ]; then
 fi
 
 echo "---> Installing application source..."
-cp -Rf /tmp/src/. ./
+# cp -Rf /tmp/src/. ./
 
 echo "---> Building application from source..."
-sbt --debug clean dist stage
-cp -Rf ./target/universal/stage ../app
+sbt --debug about
+# cp -Rf ./target/universal/stage ../app

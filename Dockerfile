@@ -23,13 +23,13 @@ COPY bintray--sbt-rpm.repo /etc/yum.repos.d/bintray--sbt-rpm.repo
 RUN yum install -y \
         java-${JAVA_VERSION}-openjdk \
         java-${JAVA_VERSION}-openjdk-devel \
-        sbt && \
+        sbt-${SBT_VERSION} && \
     yum clean all -y
 
 # copy the s2i scripts into the image
 COPY ./.s2i/bin $STI_SCRIPTS_PATH
 
-# chown the ivy directories to the correct user
+# chown the app directories to the correct user
 RUN chown -R 1001:0 /opt/app-root && \
     chmod -R g+rw /opt/app-root && \
     chmod -R g+rx $STI_SCRIPTS_PATH
