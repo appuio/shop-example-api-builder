@@ -30,3 +30,5 @@ groups
 
 echo "---> Building application from source..."
 sbt -ivy /opt/app-root/src/.ivy2 --debug stage
+sbt -ivy /opt/app-root/src/.ivy2 --debug stage
+sbt -ivy /opt/app-root/src/.ivy2 --debug stage
