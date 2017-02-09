@@ -29,9 +29,12 @@ RUN yum install -y \
 # copy the s2i scripts into the image
 COPY ./.s2i/bin $STI_SCRIPTS_PATH
 
+# initialize SBT
+RUN sbt -ivy ${HOME}/.ivy2 about
+
 # chown the app directories to the correct user
-RUN chown -R 1001:0 /opt/app-root && \
-    chmod -R g+rw /opt/app-root && \
+RUN chown -R 1001:0 $HOME && \
+    chmod -R g+rw $HOME && \
     chmod -R g+rx $STI_SCRIPTS_PATH
 
 # expose the default Play! port
@@ -39,9 +42,6 @@ EXPOSE 9000
 
 # switch to the user 1001
 USER 1001
-
-# initialize SBT
-# RUN sbt -ivy ${HOME}/.ivy2 about
 
 # show usage info as a default command
 CMD ["usage"]
