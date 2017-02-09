@@ -26,11 +26,11 @@ RUN yum install -y \
         sbt-${SBT_VERSION} && \
     yum clean all -y
 
-# copy the s2i scripts into the image
-COPY ./.s2i/bin $STI_SCRIPTS_PATH
-
 # initialize SBT
 RUN sbt -ivy ${HOME}/.ivy2 about
+
+# copy the s2i scripts into the image
+COPY ./.s2i/bin $STI_SCRIPTS_PATH
 
 # chown the app directories to the correct user
 RUN chown -R 1001:0 $HOME && \
