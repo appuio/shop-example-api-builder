@@ -27,7 +27,7 @@ RUN yum install -y \
     yum clean all -y
 
 # initialize SBT
-RUN sbt -ivy ${HOME}/.ivy2 about
+# RUN sbt -ivy ${HOME}/.ivy2 about
 
 # copy the s2i scripts into the image
 COPY ./.s2i/bin $STI_SCRIPTS_PATH
