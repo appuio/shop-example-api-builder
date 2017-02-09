@@ -29,4 +29,4 @@ ls -la .
 groups
 
 echo "---> Building application from source..."
-sbt -ivy ~/.ivy2 -debug -verbose -mem 256 dist stage
+sbt -ivy ~/.ivy2 -debug -verbose -mem 2048 dist stage
