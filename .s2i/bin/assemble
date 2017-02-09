@@ -18,10 +18,12 @@ fi
 if [ "$(ls /tmp/artifacts/ 2>/dev/null)" ]; then
   echo "---> Restoring build artifacts..."
   mv /tmp/artifacts/. ./
+  rm -rf /tmp/artifacts
 fi
 
 echo "---> Installing application source..."
 cp -Rf /tmp/src/. ./
+rm -rf /tmp/src
 
 echo "---> Debugging..."
 pwd
@@ -30,3 +32,4 @@ groups
 
 echo "---> Building application from source..."
 sbt -ivy ~/.ivy2 -verbose -mem 1024 dist stage
+chmod u+x /opt/app-root/src/target/universal/stage/bin/*
