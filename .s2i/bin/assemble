@@ -25,5 +25,4 @@ cp -Rf /tmp/src/. ./
 ls -la .
 
 echo "---> Building application from source..."
-sbt -ivy /opt/app-root/src/.ivy2 --debug about
-# cp -Rf ./target/universal/stage ../app
+sbt -ivy /opt/app-root/src/.ivy2 --debug stage
