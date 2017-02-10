@@ -31,6 +31,6 @@ ls -la .
 groups
 
 echo "---> Building application from source..."
-sbt -ivy ~/.ivy2 -verbose -mem 1024 dist stage
-chgrp 0 /opt/app-root/src/target/universal/stage/bin/*
-chmod g+x /opt/app-root/src/target/universal/stage/bin/*
+sbt -ivy ~/.ivy2 -verbose -mem 1024 stage
+chgrp 0 target/universal/stage/bin/*
+chmod g+x target/universal/stage/bin/*
