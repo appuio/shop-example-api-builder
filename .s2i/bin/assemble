@@ -34,6 +34,6 @@ groups
 ls -la /tmp/artifacts
 
 echo "---> Building application from source..."
-sbt -ivy ~/.ivy2 -verbose -mem 1024 stage
+sbt -ivy ~/.ivy2 -verbose -mem 1024 clean stage
 chgrp 0 target/universal/stage/bin/*
 chmod g+x target/universal/stage/bin/*
