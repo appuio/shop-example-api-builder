@@ -31,7 +31,6 @@ echo "---> Debugging..."
 pwd
 ls -la .
 groups
-ls -la /tmp/artifacts
 
 echo "---> Building application from source..."
 sbt -ivy ~/.ivy2 -verbose -mem 1024 clean stage
