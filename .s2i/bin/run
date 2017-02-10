@@ -8,4 +8,4 @@
 #
 
 # TODO: inject application secret via environment variable
-exec "/opt/app-root/src/target/universal/stage/bin/play_scala_learning -Dpidfile.path=/tmp/app.pid"
+exec "/opt/app-root/src/target/universal/stage/bin/play_scala_learning" -Dpidfile.path=/tmp/app.pid
