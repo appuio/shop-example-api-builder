@@ -13,11 +13,13 @@ if [[ "$1" == "-h" ]]; then
 	exec /usr/libexec/s2i/usage
 fi
 
+ls -la /tmp/artifacts
+
 # Restore artifacts from the previous build (if they exist).
 #
 if [ "$(ls /tmp/artifacts/ 2>/dev/null)" ]; then
   echo "---> Restoring build artifacts..."
-  rsync -a /tmp/artifacts/. ./
+  cp -Rn /tmp/artifacts/. ./
   rm -rf /tmp/artifacts
 fi
 
@@ -29,6 +31,7 @@ echo "---> Debugging..."
 pwd
 ls -la .
 groups
+ls -la /tmp/artifacts
 
 echo "---> Building application from source..."
 sbt -ivy ~/.ivy2 -verbose -mem 1024 stage
