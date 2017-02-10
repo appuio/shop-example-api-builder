@@ -17,7 +17,7 @@ fi
 #
 if [ "$(ls /tmp/artifacts/ 2>/dev/null)" ]; then
   echo "---> Restoring build artifacts..."
-  cp /tmp/artifacts/. ./
+  rsync -a /tmp/artifacts/. ./
   rm -rf /tmp/artifacts
 fi
 
