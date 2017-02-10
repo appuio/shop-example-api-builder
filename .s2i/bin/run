@@ -7,4 +7,5 @@
 #	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
 
-exec "/opt/app-root/src/target/universal/stage/bin/play_scala_learning"
+# TODO: inject application secret via environment variable
+exec "/opt/app-root/src/target/universal/stage/bin/play_scala_learning -Dpidfile.path=/tmp/app.pid"
