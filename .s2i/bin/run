@@ -8,4 +8,5 @@
 #
 
 # TODO: inject application secret via environment variable
-exec "/opt/app-root/src/target/universal/stage/bin/play_scala_learning" -Dpidfile.path=/tmp/app.pid
+# TODO: inject application name via environment variable
+exec "/opt/app-root/src/target/universal/stage/bin/docs_example_api" -Dpidfile.path=/tmp/app.pid
