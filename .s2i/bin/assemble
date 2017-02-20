@@ -13,7 +13,7 @@ if [[ "$1" == "-h" ]]; then
 	exec /usr/libexec/s2i/usage
 fi
 
-ls -la /tmp/artifacts
+# ls -la /tmp/artifacts
 
 # Restore artifacts from the previous build (if they exist).
 #
@@ -27,10 +27,10 @@ echo "---> Installing application source..."
 cp -Rf /tmp/src/. ./
 rm -rf /tmp/src
 
-echo "---> Debugging..."
-pwd
-ls -la .
-groups
+# echo "---> Debugging..."
+# pwd
+# ls -la .
+# groups
 
 echo "---> Building application from source..."
 sbt -ivy ~/.ivy2 -verbose -mem 1024 clean stage
