@@ -34,5 +34,7 @@ rm -rf /tmp/src
 
 echo "---> Building application from source..."
 sbt -ivy ~/.ivy2 -verbose -mem 1024 clean stage
+pwd
+ls -la
 chgrp 0 target/universal/stage/bin/*
 chmod g+x target/universal/stage/bin/*
