@@ -1,7 +1,7 @@
 # extend the base image provided by OpenShift
 FROM openshift/base-centos7
 
-ARG STI_SCRIPTS_PATH=$STI_SCRIPTS_PATH
+ENV STI_SCRIPTS_PATH /usr/local/s2i
 
 # set labels used in OpenShift to describe the builder image
 LABEL \
@@ -46,4 +46,4 @@ EXPOSE 9000
 USER 1001
 
 # show usage info as a default command
-CMD ["usage"]
+CMD ["/usr/local/s2i/usage"]
