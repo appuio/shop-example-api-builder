@@ -18,6 +18,9 @@ ENV JAVA_VERSION=1.8.0 \
     HOME=/opt/app-root/src \
     PATH=/opt/app-root/bin:$PATH
 
+# expose the default Play! port
+EXPOSE 9000
+
 # add the repository for SBT to the yum package manager
 COPY bintray--sbt-rpm.repo /etc/yum.repos.d/bintray--sbt-rpm.repo
 
@@ -39,9 +42,6 @@ COPY ./.s2i/bin $STI_SCRIPTS_PATH
 RUN chown -R 1001:0 $HOME && \
     chmod -R g+rw $HOME && \
     chmod -R g+rx $STI_SCRIPTS_PATH
-
-# expose the default Play! port
-EXPOSE 9000
 
 # switch to the user 1001
 USER 1001
