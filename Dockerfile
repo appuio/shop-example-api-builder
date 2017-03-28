@@ -1,6 +1,8 @@
 # extend the base image provided by OpenShift
 FROM openshift/base-centos7
 
+ARG STI_SCRIPTS_PATH=$STI_SCRIPTS_PATH
+
 # set labels used in OpenShift to describe the builder image
 LABEL \
     io.k8s.description="Platform for building Scala Play! applications" \
