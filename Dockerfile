@@ -1,7 +1,7 @@
 # extend the base image provided by OpenShift
 FROM openshift/base-centos7
 
-ENV STI_SCRIPTS_PATH /usr/libexec/s2i
+# ENV STI_SCRIPTS_PATH /usr/libexec/s2i
 
 # set labels used in OpenShift to describe the builder image
 LABEL \
@@ -25,7 +25,7 @@ COPY bintray--sbt-rpm.repo /etc/yum.repos.d/bintray--sbt-rpm.repo
 RUN yum install -y \
         java-${JAVA_VERSION}-openjdk \
         java-${JAVA_VERSION}-openjdk-devel \
-        sbt-${SBT_VERSION} && \
+        sbt-${SBT_VERSION} \
         postgresql && \
     yum clean all -y
 
@@ -47,4 +47,4 @@ EXPOSE 9000
 USER 1001
 
 # show usage info as a default command
-CMD ["/usr/libexec/s2i/usage"]
+CMD ["$STI_SCRIPTS_PATH/usage"]
