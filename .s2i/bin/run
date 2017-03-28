@@ -10,4 +10,4 @@
 # TODO: inject application secret via environment variable
 # TODO: inject application name via environment variable
 # exec "/opt/app-root/src/target/universal/stage/bin/docs_example_api" -Dpidfile.path=/tmp/app.pid
-exec "/opt/app-root/src/entrypoint.sh /opt/app-root/src/target/universal/stage/bin/docs_example_api -Dpidfile.path=/tmp/app.pid"
+exec "/opt/app-root/src/entrypoint.sh /bin/bash -c '/opt/app-root/src/target/universal/stage/bin/docs_example_api -Dpidfile.path=/tmp/app.pid'"
