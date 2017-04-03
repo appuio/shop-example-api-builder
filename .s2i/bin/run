@@ -7,5 +7,27 @@
 #	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
 
-# exec "/opt/app-root/src/target/universal/stage/bin/docs_example_api" -Dpidfile.path=/tmp/app.pid
-exec /opt/app-root/src/entrypoint.sh /opt/app-root/src/target/universal/stage/bin/docs_example_api -Dpidfile.path=/tmp/app.pid
+set -e
+
+# if no port is set, use default for postgres
+DB_PORT=${DB_PORT:-5432}
+
+# save db credentials to pgpass file
+# such that the psql command can connect
+echo "$DB_HOSTNAME:$DB_PORT:$DB_DATABASE:$DB_USERNAME:$DB_PASSWORD" > ~/.pgpass
+chmod 600 ~/.pgpass
+export PGPASSFILE=~/.pgpass
+
+# concatenate the correct db connection string
+DB_URL="jdbc:postgresql://$DB_HOSTNAME:$DB_PORT/$DB_DATABASE"
+
+# sleep as long as postgres is not ready yet
+until psql -h "$DB_HOSTNAME" -U "$DB_USERNAME"; do
+  >&2 echo "Postgres is unavailable - sleeping"
+  sleep 1
+done
+
+# as soon as postgres is up, execute the application with given params
+# include the correct db connection string
+>&2 echo "Postgres is up - executing command"
+exec DB_URL=$DB_URL /opt/app-root/src/target/universal/stage/bin/docs_example_api -Dpidfile.path=/tmp/app.pid
