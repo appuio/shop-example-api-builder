@@ -30,4 +30,4 @@ done
 # as soon as postgres is up, execute the application with given params
 # include the correct db connection string
 >&2 echo "Postgres is up - executing command"
-exec DB_URL=$DB_URL /opt/app-root/src/target/universal/stage/bin/docs_example_api -Dpidfile.path=/tmp/app.pid
+exec env DB_URL=$DB_URL /opt/app-root/src/target/universal/stage/bin/docs_example_api -Dpidfile.path=/tmp/app.pid
