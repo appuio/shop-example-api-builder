@@ -20,6 +20,7 @@ export PGPASSFILE=~/.pgpass
 
 # concatenate the correct db connection string
 DB_URL="jdbc:postgresql://$DB_HOSTNAME:$DB_PORT/$DB_DATABASE"
+echo "(debug) DB_URL=$DB_URL"
 
 # sleep as long as postgres is not ready yet
 until psql -h "$DB_HOSTNAME" -U "$DB_USERNAME"; do
@@ -30,4 +31,4 @@ done
 # as soon as postgres is up, execute the application with given params
 # include the correct db connection string
 >&2 echo "Postgres is up - executing command"
-exec /opt/app-root/src/target/universal/stage/bin/docs_example_api -Dpidfile.path=/tmp/app.pid -Dslick.dbs.default.db.url=$DB_URL
+exec /opt/app-root/src/target/universal/stage/bin/docs_example_api -Dslick.dbs.default.db.url=$DB_URL
