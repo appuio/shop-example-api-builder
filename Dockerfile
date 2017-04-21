@@ -14,7 +14,7 @@ LABEL \
 
 # specify wanted versions of Java and SBT
 ENV JAVA_VERSION=1.8.0 \
-    SBT_VERSION=0.13.13.1-1 \
+    SBT_VERSION=0.13.15 \
     HOME=/opt/app-root/src \
     PATH=/opt/app-root/bin:$PATH
 
